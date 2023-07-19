@@ -1,8 +1,15 @@
 (ns todo-re-frame.subs
   (:require
-   [re-frame.core :as re-frame]))
+   [re-frame.core :as rf]))
 
-(re-frame/reg-sub
- ::name
- (fn [db]
-   (:name db)))
+(rf/reg-sub
+ ::todos
+ (fn [db _]
+   (:todos db)))
+
+(rf/reg-sub
+ ::todo-list
+ :<- [::todos]
+ (fn [todos _]
+   (vals todos)))
+   

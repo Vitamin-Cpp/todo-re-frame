@@ -1,7 +1,8 @@
 (ns todo-re-frame.views
   (:require
    [re-frame.core :as re-frame]
-   [todo-re-frame.subs :as subs]))
+   [todo-re-frame.subs :as subs]
+   [re-frame.core :as rf]))
 
 (defn todo [description status]
   [:div.todo
@@ -17,9 +18,10 @@
     "X"]])
 
 (defn todo-list []
-  [:div.todo-list
-   [todo "Improve the look of it" :done]
-   [todo "Add footer" :active]])
+  (let [todo-list @(rf/subscribe [::subs/todo-list])]
+    [:div.todo-list
+     (for [item todo-list]
+       ^{:key (:id item)} [todo (:description item) (:status item)])]))
 
 (defn footer-controls []
   [:div.footer-controls
