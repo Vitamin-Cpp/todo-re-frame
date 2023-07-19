@@ -1,6 +1,7 @@
 (ns todo-re-frame.events
   (:require [re-frame.core :as rf]
-            [todo-re-frame.db :as db]))
+            [todo-re-frame.db :as db]
+            [todo-re-frame.subs :refer [done?]]))
 
 (rf/reg-event-db
  ::initialize-db
@@ -16,6 +17,17 @@
  ::remove-todo
  (fn [db [_ id]]
    (update-in db [:todos] dissoc id)))
+
+(rf/reg-event-db
+ ::clear-completed
+ (rf/path [:todos])
+ (fn [todos _]
+   (let [done-ids (->> (vals todos)
+                       (filter done?)
+                       (map :id))]
+     (reduce dissoc todos done-ids))))
+
+
 
 (rf/reg-event-db
  ::toggle-status

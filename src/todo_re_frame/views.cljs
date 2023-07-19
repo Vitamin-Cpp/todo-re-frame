@@ -48,7 +48,9 @@
     [:div.footer
      [:p.items-togo (str active-todos " Item(s) todo")]
      [footer-controls]
-     [:p.clear-completed "clear completed"]]))
+     [:p.clear-completed
+      {:on-click #(rf/dispatch [::events/clear-completed])}
+      "clear completed"]]))
 
 
 (defn main-panel []
