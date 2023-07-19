@@ -1,10 +1,13 @@
 (ns todo-re-frame.events
-  (:require
-   [re-frame.core :as re-frame]
-   [todo-re-frame.db :as db]
-   ))
+  (:require [re-frame.core :as rf]
+            [todo-re-frame.db :as db]))
 
-(re-frame/reg-event-db
+(rf/reg-event-db
  ::initialize-db
  (fn [_ _]
    db/default-db))
+
+(rf/reg-event-db
+ ::edit-todo-description
+ (fn [db [_ id description]]
+   (assoc-in db [:todos id :description] description)))
