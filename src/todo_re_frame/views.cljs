@@ -44,10 +44,11 @@
 
 
 (defn footer []
-  [:div.footer
-   [:p.items-togo "3 Items todo"]
-   [footer-controls]
-   [:p.clear-completed "clear completed"]])
+  (let [active-todos @(rf/subscribe [::subs/count-active-todos])]
+    [:div.footer
+     [:p.items-togo (str active-todos " Item(s) todo")]
+     [footer-controls]
+     [:p.clear-completed "clear completed"]]))
 
 
 (defn main-panel []
