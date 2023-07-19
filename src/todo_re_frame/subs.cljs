@@ -36,3 +36,22 @@
  :<- [::active-todos]
  (fn [active-todos _]
    (count active-todos)))
+
+(rf/reg-sub
+ ::showing
+ (fn [db _]
+   (:showing db)))
+
+(rf/reg-sub
+ ::filtered-todos
+ :<- [::todo-list]
+ :<- [::showing]
+ (fn [[todo-list showing] _]
+   (cond
+     (= showing :done)
+     (filter done? todo-list)
+     (= showing :active)
+     (filter active? todo-list)
+     :else
+     todo-list)))
+

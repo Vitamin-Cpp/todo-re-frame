@@ -27,7 +27,7 @@
 
 
 (defn todo-list []
-  (let [todo-list @(rf/subscribe [::subs/todo-list])]
+  (let [todo-list @(rf/subscribe [::subs/filtered-todos])]
     [:div.todo-list
      (for [item todo-list]
        ^{:key (:id item)} [todo item])]))
