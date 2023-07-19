@@ -16,3 +16,11 @@
  ::remove-todo
  (fn [db [_ id]]
    (update-in db [:todos] dissoc id)))
+
+(rf/reg-event-db
+ ::toggle-status
+ (fn [db [_ id]]
+   (let [current-status (get-in db [:todos id :status])]
+     (if (= current-status :done)
+       (assoc-in db [:todos id :status] :active)
+       (assoc-in db [:todos id :status] :done)))))

@@ -10,7 +10,8 @@
         status (:status item)]
     [:div.todo
      [:button.todo-status
-      {:style {:background-color (if (= status :done)
+      {:on-click #(rf/dispatch [::events/toggle-status id])
+       :style {:background-color (if (= status :done)
                                    "rgb(200, 240, 200)"
                                    "rgb(253, 245, 234)")}}
       status]
