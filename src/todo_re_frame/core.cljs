@@ -4,9 +4,9 @@
    [re-frame.core :as re-frame]
    [todo-re-frame.events :as events]
    [todo-re-frame.views :as views]
-   [todo-re-frame.config :as config]
-   ))
+   [todo-re-frame.config :as config]))
 
+(enable-console-print!)
 
 (defn dev-setup []
   (when config/debug?
