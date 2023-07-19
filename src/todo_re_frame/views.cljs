@@ -34,9 +34,15 @@
 
 (defn footer-controls []
   [:div.footer-controls
-   [:button.active-filter :all]
-   [:button :done]
-   [:button :active]])
+   [:button
+    {:on-click #(rf/dispatch [::events/showing :all])}
+    :all]
+   [:button
+    {:on-click #(rf/dispatch [::events/showing :done])}
+    :done]
+   [:button
+    {:on-click #(rf/dispatch [::events/showing :active])}
+    :active]])
 
 (defn header []
   [:div.header

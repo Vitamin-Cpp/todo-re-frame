@@ -36,3 +36,9 @@
      (if (= current-status :done)
        (assoc-in db [:todos id :status] :active)
        (assoc-in db [:todos id :status] :done)))))
+
+(rf/reg-event-db
+ ::showing
+ (fn [db [_ filter]]
+   (assoc-in db [:showing] filter)))
+

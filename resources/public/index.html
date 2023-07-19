@@ -12,5 +12,16 @@
     </noscript>
     <div id="app"></div>
     <script src="/js/compiled/app.js"></script>
+    <script>
+        let footerControlsButton = document.querySelectorAll(".footer-controls > button")
+        footerControlsButton.forEach(function(elem) {
+          elem.addEventListener("click", function(e){
+            footerControlsButton.forEach(function(el){
+              el.classList.remove("active-filter");
+            });
+            e.target.classList.add("active-filter");
+          })
+        })
+    </script>
   </body>
 </html>
