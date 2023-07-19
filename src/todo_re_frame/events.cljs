@@ -11,3 +11,8 @@
  ::edit-todo-description
  (fn [db [_ id description]]
    (assoc-in db [:todos id :description] description)))
+
+(rf/reg-event-db
+ ::remove-todo
+ (fn [db [_ id]]
+   (update-in db [:todos] dissoc id)))

@@ -1,6 +1,5 @@
 (ns todo-re-frame.views
   (:require
-   [re-frame.core :as re-frame]
    [todo-re-frame.subs :as subs]
    [todo-re-frame.events :as events]
    [re-frame.core :as rf]))
@@ -22,6 +21,7 @@
                     (let [current-description (-> e .-target .-value)]
                       (rf/dispatch [::events/edit-todo-description id current-description])))}]
      [:button.remove
+      {:on-click #(rf/dispatch [::events/remove-todo id])}
       "X"]]))
 
 
