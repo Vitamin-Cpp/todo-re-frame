@@ -33,13 +33,19 @@
        ^{:key (:id item)} [todo item])]))
 
 (defn add-todo []
-  [:div.new-todo-section
-   [:input.new-todo-description
-    {:type :text
-     :placeholder "Add new todo..."}]
-   [:button.add-new-todo
-    {}
-    "Add"]])
+  (let [new-todo @(rf/subscribe [::subs/new-todo])]
+    [:<>
+     [:div.new-todo-section
+      [:input.new-todo-description
+       {:type :text
+        :placeholder "Add new todo..."
+        :on-change (fn [e] (rf/dispatch [::events/new-todo (-> e .-target .-value)]))
+        :value new-todo}]
+      [:button.add-new-todo
+       {:on-click (fn []
+                    (rf/dispatch [::events/clear-new-todo])
+                    (rf/dispatch [::events/add-todo new-todo]))}
+       "Add"]]]))
 
 
 (defn footer-controls []

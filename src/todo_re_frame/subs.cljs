@@ -55,3 +55,8 @@
      :else
      todo-list)))
 
+(rf/reg-sub
+ ::new-todo
+ (fn [db _]
+   (:next-todo-description db)))
+

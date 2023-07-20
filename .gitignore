@@ -17,3 +17,4 @@
 /.lsp/
 /.clj-kondo/
 /dev/
+.calva/output-window/output.calva-repl

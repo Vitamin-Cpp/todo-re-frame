@@ -13,4 +13,6 @@
            2 {:id 2
               :description "Emit db event for todo app"
               :status :active}}
+   :next-todo-id 0
+   :next-todo-description ""
    :showing :all})

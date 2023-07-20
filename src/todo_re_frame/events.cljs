@@ -42,3 +42,30 @@
  (fn [db [_ filter]]
    (assoc-in db [:showing] filter)))
 
+
+(def generate-next-todo-id
+  (rf/->interceptor
+   :id      :generate-next-todo-id
+   :before  (fn [context]
+              (let [max-todo-id (apply max (keys (get-in context [:coeffects :db :todos])))]
+                (assoc-in context [:coeffects :db :next-todo-id] ((fnil inc 0) max-todo-id))))))
+
+(rf/reg-event-db
+ ::add-todo
+ [generate-next-todo-id]
+ (fn [db [_ description]]
+   (let [id (get-in db [:next-todo-id])
+         status :active]
+     (assoc-in db [:todos id] {:id id
+                               :description description
+                               :status status}))))
+
+(rf/reg-event-db
+ ::new-todo
+ (fn [db [_ description]]
+   (assoc-in db [:next-todo-description] description)))
+
+(rf/reg-event-db
+ ::clear-new-todo
+ (fn [db _]
+   (assoc-in db [:next-todo-description] "")))
