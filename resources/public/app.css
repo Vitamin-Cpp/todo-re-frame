@@ -123,3 +123,33 @@ button:hover, .clear-completed, .todo-description {
     color: red;
     font-weight: 600;
 }
+
+.new-todo-section {
+    width: 50%;
+    display: flex;
+}
+
+.new-todo-description {
+    flex: 1;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(253, 245, 234);
+    padding: 9px 16px;
+}
+
+.add-new-todo {
+    padding: 9px 16px;
+    width: 80px;
+
+    background-color: rgb(196, 157, 106);
+    color: white;
+    font-weight: 500;
+
+    border-radius: 5px;
+    border: none;
+}
+
+input:focus {
+    outline-color: rgb(196, 157, 106);
+}

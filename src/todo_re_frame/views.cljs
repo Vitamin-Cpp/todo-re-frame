@@ -32,6 +32,16 @@
      (for [item todo-list]
        ^{:key (:id item)} [todo item])]))
 
+(defn add-todo []
+  [:div.new-todo-section
+   [:input.new-todo-description
+    {:type :text
+     :placeholder "Add new todo..."}]
+   [:button.add-new-todo
+    {}
+    "Add"]])
+
+
 (defn footer-controls []
   [:div.footer-controls
    [:button
@@ -62,6 +72,7 @@
 (defn main-panel []
   [:div.main
    [header]
+   [add-todo]
    [todo-list]
    [footer]])
   
